@@ -1,50 +1,145 @@
-# Mali_Drought_Monitoring_Dashboard
-Automated Agricultural Drought Intelligence &amp; Early Warning System  An end-to-end data analytics and forecasting pipeline that synchronizes heterogeneous meteorological rainfall indicators (SPI) with satellite vegetative health indices (NDVI) to pinpoint and predict environmental risk.
-Automated Agricultural Drought Intelligence & Early Warning System
+Mali Agricultural Drought Monitoring Dashboard
 
-An end-to-end data analytics and forecasting pipeline that synchronizes heterogeneous meteorological rainfall indicators (SPI) with satellite vegetative health indices (NDVI) to pinpoint and predict environmental risk.
+Project Description
 
-## 📊 Key Features & Engineering
-- **Data Synchronization**: Unified messy daily/pentad precipitation records and satellite NDVI metrics onto a common monthly timeline.
-- **Multi-Window Drought Indices**: Automated rolling-window calculations for the Standardized Precipitation Index across short-term and long-term horizons (SPI-1, SPI-3, SPI-6).
-- **Cross-Correlation Core**: Mathematically discovered an explicit **60-day lag time window** showing a peak correlation of **r = +0.860** between short-term moisture shifts and canopy response.
-- **Predictive Engine**: Integrated an autoregressive multivariate forecasting model (R² = 0.845) capable of predicting upcoming agricultural failure bounds 3 months in advance.
+This project develops an agricultural drought monitoring system for Mali by integrating satellite-derived vegetation indicators and rainfall-based drought indices. The dashboard combines rainfall anomalies, Standardized Precipitation Index (SPI), Normalized Difference Vegetation Index (NDVI) anomalies, and Vegetation Condition Index (VCI) to identify drought hotspots across Mali.
 
----
+The project demonstrates the use of climate and remote sensing data for drought early warning and agricultural monitoring.
 
-## 🔍 Core Data Findings
+Objectives
+Monitor rainfall variability across Mali.
+Detect meteorological drought using SPI.
+Assess vegetation stress using NDVI and VCI.
+Identify agricultural drought hotspots by combining SPI and VCI.
+Visualize drought conditions through interactive charts and maps.
+Datasets Used
+Dataset	Source	Period
+CHIRPS Rainfall	CHIRPS Climate Data Archive	1981–2026
+NDVI	MODIS Vegetation Indices Products or GIMMS NDVI3g Dataset	2002–2026
+Administrative Boundaries	Humanitarian Data Exchange (HDX) Mali Boundaries	Current
+Methodology
+1. Data Cleaning
+Removed missing values.
+Standardized date formats.
+Harmonized administrative units.
+Aggregated monthly observations.
+2. Rainfall Anomalies
 
-### 1. The 60-Day Drought Fuse
-Statistical analysis over the synchronized baseline records confirms that immediate moisture changes have near-zero contemporary correlation (+0.098) with current greenness. However, tracking a rolling 3-month window exposes a highly synchronized pattern. Water stress anomalies and moisture deficits impact regional vegetation canopy health precisely two months later. 
+Rainfall anomalies were calculated as:
 
-### 2. Multi-Month Predictive Scenarios (Early Warning Horizon)
-Using our validated multivariate framework, the system evaluates three forward trajectories from the end of the historical baseline:
-- **Dry Decay Path (SPI-3 ≈ -1.5)**: Triggers a rapid vegetation drop to **0.174** by month 2, breaching the critical **Agricultural Crash Boundary (NDVI = 0.200)**.
-- **Climatic Normal Path (SPI-3 ≈ 0.0)**: Projects a standard seasonal winter decay to **0.232** before a normal spring green-up.
-- **Accelerated Recovery Bound (SPI-3 ≈ +1.5)**: Predicts immediate stabilization at **0.281**, completely bypassing seasonal stress.
+Anomaly=Rainfall
+i
+	​
 
----
+−
+Rainfall
+	​
 
-## 🛠️ Tech Stack & Dependencies
-- **Core Languages**: Python 3.11+
-- **Data Engineering**: Pandas, NumPy
-- **Statistical Analytics**: SciPy (SPI distribution fitting)
-- **Visualization**: Matplotlib, Seaborn
-- **Dashboard Interface**: Streamlit
+3. Standardized Precipitation Index (SPI)
 
----
+SPI was computed to quantify meteorological drought severity.
 
-## 📁 Repository Structure
-```text
+Interpretation:
+
+SPI	Category
+> 0	Wet conditions
+-1 to 0	Mild drought
+-1.5 to -1	Moderate drought
+-2 to -1.5	Severe drought
+< -2	Extreme drought
+4. NDVI Anomalies
+
+Vegetation anomalies were computed relative to long-term mean NDVI values.
+
+5. Vegetation Condition Index (VCI)
+VCI=
+NDVI
+max
+	​
+
+−NDVI
+min
+	​
+
+NDVI
+i
+	​
+
+−NDVI
+min
+	​
+
+	​
+
+×100
+
+VCI interpretation:
+
+VCI (%)	Condition
+0–20	Extreme drought
+21–35	Severe drought
+36–50	Moderate drought
+>50	Normal
+6. Agricultural Drought Hotspots
+
+SPI and VCI were combined to classify drought severity.
+
+Example classification:
+
+SPI	VCI	Status
+SPI < -1 and VCI < 35	Severe Drought	
+SPI < -1 and VCI < 50	Moderate Drought	
+SPI < 0 and VCI < 35	Watch	
+Otherwise	Normal	
+Technologies Used
+Python
+Pandas
+NumPy
+GeoPandas
+Matplotlib
+Plotly
+Folium
+Jupyter Notebook
+GIS (QGIS/ArcGIS)
+Repository Structure
+Mali_Drought_Monitoring_Dashboard/
+│
 ├── data/
-│   ├── raw/            # Original climate and NDVI source files
-│   └── processed/      # Calculated monthly anomalies and SPI outputs
+│   ├── raw/
+│   ├── processed/
+│
 ├── notebooks/
-│   └── drought_analysis.ipynb  # Interactive data discovery step
-├── app.py              # Main Streamlit web application source code
-├── requirements.txt    # Project package dependencies
-└── README.md           # Project summary and documentation (This file)
-```
+│   ├── 01_data_cleaning.ipynb
+│   ├── 02_rainfall_anomalies.ipynb
+│   ├── 03_spi_calculation.ipynb
+│   ├── 04_ndvi_anomalies.ipynb
+│   ├── 05_vci_calculation.ipynb
+│   └── 06_hotspot_mapping.ipynb
+│
+├── maps/
+├── dashboard/
+├── figures/
+├── README.md
+├── requirements.txt
+└── LICENSE
+Expected Outputs
+Rainfall anomaly time series.
+SPI drought analysis.
+NDVI anomaly analysis.
+VCI maps.
+Agricultural drought hotspot maps.
+Interactive drought dashboard for Mali.
+Key Skills Demonstrated
+Climate data analysis
+Remote sensing
+GIS and spatial analysis
+Drought monitoring
+Data visualization
+Python programming
+Environmental data science
+Dashboard development
+
+For your LinkedIn and portfolio, this project strongly demonstrates practical expertise in climate analytics, remote sensing, GIS, and agricultural drought monitoring, which are highly valuable in organizations such as World Food Programme, FAO, USAID, and FEWS NET.
 
 ---
 
