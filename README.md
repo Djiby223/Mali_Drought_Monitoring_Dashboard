@@ -54,4 +54,12 @@ spatial/
 notebooks/
 
 ---
+Future Improvements
+Regional drought maps
+Real-time data updates
+Additional drought indicators
+Forecasting models
+Author
+
+Adama D. SAVANE
 
